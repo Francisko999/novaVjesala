@@ -26,7 +26,7 @@ class tkinterTk(tkinter.Tk):
     def getX(self):
         return self.x+varijable.koordinateProzoraX
     def getY(self):
-        return self.y+varijable.koordinateProzoraX
+        return self.y+varijable.koordinateProzoraY
     def setX(self,vrijednost):
         self.x=vrijednost-varijable.koordinateProzoraX
     def setY(self,vrijednost):

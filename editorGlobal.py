@@ -136,5 +136,8 @@ def suceljeGumb1release(event):
     micanje=False
     varijable.sucelja[0].setX(event.x_root-tkx)
     varijable.sucelja[0].setY(event.y_root-tky)
+    #varijable.koordinateProzoraX=event.x_root-tkx
+    #varijable.koordinateProzoraY=event.y_root-tky
+    
     
     #print(micanje)
