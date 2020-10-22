@@ -26,10 +26,7 @@ def izvrsiEditorEvente(event):
         ObjIme=list(varijable.eventsQuery[event.type])[brojac]#varijable.eventsQuery[event.type][brojac]
 
         varijable.eventsQuery[event.type][ObjIme](event)
-        if event.type==5:
-            a=0
-        if event.type==4:
-            a=0
+
         brojac+=1
 
 #zodavanje pomaknutog zumiranog elementa na površinu
