@@ -24,4 +24,4 @@ while varijable.MainLoop:
     
     blitAll()
     pygame.display.flip()
-    print(varijable.eventsQuery[6].__name__)
+    #print(varijable.eventsQuery[6])

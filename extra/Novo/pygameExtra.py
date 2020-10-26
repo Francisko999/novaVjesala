@@ -129,7 +129,8 @@ class objekt0(eventInterakcija):
 
 class pgSquare(eventInterakcija):
     povrsine=[]
-    def __init__(self,surf,x=0,y=0,w=0,h=0,color=(0,0,0),alpha=255,image=""):
+    def __init__(self,surf,ime="",x=0,y=0,w=0,h=0,color=(0,0,0),alpha=255,image=""):
+        super().__init__(ime)
         self.Surface=pygame.Surface((w,h))
         self.Surface.fill(color)
         self.Surface.set_alpha(alpha)
@@ -141,6 +142,9 @@ class pgSquare(eventInterakcija):
         self.alpha=alpha
         self.surf=surf
 
+        self.mousePropagate=True
+
+
         pgSquare.povrsine.append(self)
         
     def blitMe(self):
@@ -148,8 +152,32 @@ class pgSquare(eventInterakcija):
             self.surf.Surface.blit(self.Surface,(self.x,self.y))
         except:
             self.surf.blit(self.Surface,(self.x,self.y))
+
     def MOUSEBUTTONDOWN(self,ev):
-        print(self.__name__)
+        x,y=ev.pos
+        xx,yy=self.getGlobalXY()
+        wx,hy=self.w+xx,self.h+yy
+        if(
+            x>=xx and
+            x<=wx and
+            y>=yy and
+            y<=hy
+            ):
+            
+            print("stisnuo si ",self.ime)
+        
+        #print(x,y,xx,yy,wx,hy)
+
+    def getGlobalXY(self):
+        try:
+            mx,my=self.surf.getGlobalXY()
+        except:
+            mx,my=0,0
+
+        UkupniX,UkupniY=mx+self.x,my+self.y
+
+
+        return UkupniX,UkupniY
 
 def izvrsiEditorEvente(event):
     #za svaki unos funkcije za događaj dotičnog tipa ... izvrši je
@@ -165,5 +193,5 @@ def izvrsiEditorEvente(event):
 
 def ucitajObjekte():
     o0=objekt0()
-    s1=pgSquare(varijable.screen,100,30,100,100,randomColor())
-    s2=pgSquare(s1,-5,10,10,10,randomColor())
+    s1=pgSquare(varijable.screen,"veliki",100,30,100,100,randomColor())
+    s2=pgSquare(s1,"mali",-5,10,10,10,randomColor())
