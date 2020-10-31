@@ -1,5 +1,4 @@
 from pygameExtra import *
-
 pygame.init()
 #screen = pygame.display.set_mode((200,200), pygame.RESIZABLE)
 programIcon = pygame.image.load("media/missle.png")
@@ -13,6 +12,8 @@ def blitAll():
 
 
 ucitajObjekte()
+#print(varijable.eventsQuery)
+varijable.showEventsQuery()
 while varijable.MainLoop:
     """for event in pygame.event.get():
         if event.type==pygame.QUIT:
@@ -24,4 +25,3 @@ while varijable.MainLoop:
     
     blitAll()
     pygame.display.flip()
-    #print(varijable.eventsQuery[6])

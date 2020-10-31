@@ -38,6 +38,9 @@ class varijable:
         pygame.VIDEOEXPOSE:{},
         pygame.USEREVENT:{}
     }
+    def showEventsQuery():
+        for key, value in varijable.eventsQuery.items():
+            print(key, ' : ', value)
     #screenGame=None
     EditorZoom=1
     GameZoom=1
@@ -61,36 +64,38 @@ class eventInterakcija:
             #print("nasumično ime:",self.ime)
         else:
             self.ime=ime        
-        varijable.eventsQuery[pygame.QUIT           ].update ({self.ime:self.QUIT           })
-        varijable.eventsQuery[pygame.KEYDOWN        ].update ({self.ime:self.KEYDOWN        })
-        varijable.eventsQuery[pygame.ACTIVEEVENT    ].update ({self.ime:self.ACTIVEEVENT    })
-        varijable.eventsQuery[pygame.KEYUP          ].update ({self.ime:self.KEYUP          })
-        varijable.eventsQuery[pygame.MOUSEMOTION    ].update ({self.ime:self.MOUSEMOTION    })
-        varijable.eventsQuery[pygame.MOUSEBUTTONUP  ].update ({self.ime:self.MOUSEBUTTONUP  })
-        varijable.eventsQuery[pygame.MOUSEBUTTONDOWN].update ({self.ime:self.MOUSEBUTTONDOWN})
-        varijable.eventsQuery[pygame.JOYAXISMOTION  ].update ({self.ime:self.JOYAXISMOTION  })
-        varijable.eventsQuery[pygame.JOYBALLMOTION  ].update ({self.ime:self.JOYBALLMOTION  })
-        varijable.eventsQuery[pygame.JOYHATMOTION   ].update ({self.ime:self.JOYHATMOTION   })
-        varijable.eventsQuery[pygame.JOYBUTTONUP    ].update ({self.ime:self.JOYBUTTONUP    })
-        varijable.eventsQuery[pygame.JOYBUTTONDOWN  ].update ({self.ime:self.JOYBUTTONDOWN  })
-        varijable.eventsQuery[pygame.VIDEORESIZE    ].update ({self.ime:self.VIDEORESIZE    })
-        varijable.eventsQuery[pygame.VIDEOEXPOSE    ].update ({self.ime:self.VIDEOEXPOSE    })
-        varijable.eventsQuery[pygame.USEREVENT      ].update ({self.ime:self.USEREVENT      })
-    def QUIT(self,ev):pass
-    def ACTIVEEVENT(self,ev):pass
-    def KEYDOWN(self,ev):pass
-    def KEYUP(self,ev):pass
-    def MOUSEMOTION(self,ev):pass
-    def MOUSEBUTTONUP(self,ev):pass
-    def MOUSEBUTTONDOWN(self,ev):pass
-    def JOYAXISMOTION(self,ev):pass
-    def JOYBALLMOTION(self,ev):pass
-    def JOYHATMOTION(self,ev):pass
-    def JOYBUTTONUP(self,ev):pass
-    def JOYBUTTONDOWN(self,ev):pass
-    def VIDEORESIZE(self,ev):pass
-    def VIDEOEXPOSE(self,ev):pass
-    def USEREVENT(self,ev):pass
+        try:varijable.eventsQuery[pygame.QUIT           ].update ({self.ime:self.QUIT           })
+        except:pass
+        try:varijable.eventsQuery[pygame.KEYDOWN        ].update ({self.ime:self.KEYDOWN        })
+        except:pass
+        try:varijable.eventsQuery[pygame.ACTIVEEVENT    ].update ({self.ime:self.ACTIVEEVENT    })
+        except:pass
+        try:varijable.eventsQuery[pygame.KEYUP          ].update ({self.ime:self.KEYUP          })
+        except:pass
+        try:varijable.eventsQuery[pygame.MOUSEMOTION    ].update ({self.ime:self.MOUSEMOTION    })
+        except:pass
+        try:varijable.eventsQuery[pygame.MOUSEBUTTONUP  ].update ({self.ime:self.MOUSEBUTTONUP  })
+        except:pass
+        try:varijable.eventsQuery[pygame.MOUSEBUTTONDOWN].update ({self.ime:self.MOUSEBUTTONDOWN})
+        except:pass
+        try:varijable.eventsQuery[pygame.JOYAXISMOTION  ].update ({self.ime:self.JOYAXISMOTION  })
+        except:pass
+        try:varijable.eventsQuery[pygame.JOYBALLMOTION  ].update ({self.ime:self.JOYBALLMOTION  })
+        except:pass
+        try:varijable.eventsQuery[pygame.JOYHATMOTION   ].update ({self.ime:self.JOYHATMOTION   })
+        except:pass
+        try:varijable.eventsQuery[pygame.JOYBUTTONUP    ].update ({self.ime:self.JOYBUTTONUP    })
+        except:pass
+        try:varijable.eventsQuery[pygame.JOYBUTTONDOWN  ].update ({self.ime:self.JOYBUTTONDOWN  })
+        except:pass
+        try:varijable.eventsQuery[pygame.VIDEORESIZE    ].update ({self.ime:self.VIDEORESIZE    })
+        except:pass
+        try:varijable.eventsQuery[pygame.VIDEOEXPOSE    ].update ({self.ime:self.VIDEOEXPOSE    })
+        except:pass
+        try:varijable.eventsQuery[pygame.USEREVENT      ].update ({self.ime:self.USEREVENT      })
+        except:pass
+
+
 
 class objekt0(eventInterakcija):
     def QUIT(self,ev):
@@ -136,6 +141,8 @@ class pgSquare(eventInterakcija):
         self.Surface.set_alpha(alpha)
         self.x=x
         self.y=y
+        self.gX,self.gY=self.getGlobalXY()
+        self.rect=pygame.Rect((self.gX,self.gY,w,h))
         self.w=w
         self.h=h
         self.color=color
@@ -155,6 +162,7 @@ class pgSquare(eventInterakcija):
 
     def MOUSEBUTTONDOWN(self,ev):
         x,y=ev.pos
+        print(self.rect.collidepoint(x, y))
         xx,yy=self.getGlobalXY()
         wx,hy=self.w+xx,self.h+yy
         if(
