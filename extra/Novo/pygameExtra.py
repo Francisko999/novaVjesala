@@ -54,7 +54,7 @@ class varijable:
     koordinateProzoraX=50
     koordinateProzoraY=50
     #"""
-    screen = pygame.display.set_mode((200,200), pygame.RESIZABLE)
+    screen = pygame.display.set_mode((300,300), pygame.RESIZABLE)
     #"""
 
 class eventInterakcija:
@@ -141,19 +141,20 @@ class pgSquare(eventInterakcija):
         self.Surface.set_alpha(alpha)
         self.x=x
         self.y=y
-        self.gX,self.gY=self.getGlobalXY()
         self.rect=pygame.Rect((self.gX,self.gY,w,h))
         self.w=w
         self.h=h
         self.color=color
         self.alpha=alpha
         self.surf=surf
+        self.gX,self.gY=self.getGlobalXY()
+        print(self.ime,self.getGlobalXY())
 
         self.mousePropagate=True
 
 
         pgSquare.povrsine.append(self)
-        
+        self.markBox()
     def blitMe(self):
         try:
             self.surf.Surface.blit(self.Surface,(self.x,self.y))
@@ -162,30 +163,33 @@ class pgSquare(eventInterakcija):
 
     def MOUSEBUTTONDOWN(self,ev):
         x,y=ev.pos
-        print(self.rect.collidepoint(x, y))
-        xx,yy=self.getGlobalXY()
+        xx,yy=self.gX,self.gY
+        print(self.ime,self.rect.collidepoint(x, y))
         wx,hy=self.w+xx,self.h+yy
-        if(
+        """if(
             x>=xx and
             x<=wx and
             y>=yy and
             y<=hy
             ):
             
-            print("stisnuo si ",self.ime)
+            print("stisnuo si ",self.ime)"""
         
         #print(x,y,xx,yy,wx,hy)
 
     def getGlobalXY(self):
-        try:
-            mx,my=self.surf.getGlobalXY()
+        print(self.ime,"try",self.surf)
+        """try:
+            print(self.ime,"try",self.surf)
+            #mx,my=self.surf.getGlobalXY()
         except:
-            mx,my=0,0
-
-        UkupniX,UkupniY=mx+self.x,my+self.y
-
-
-        return UkupniX,UkupniY
+            #mx,my=self.x,self.y
+            print(self.ime,"exc")"""
+        #UkupniX,UkupniY=mx+self.x,my+self.y
+        #return UkupniX,UkupniY
+        return 0,0
+    def markBox(self):
+        pygame.draw.rect(varijable.screen,(255,0,0),[5,5,30,30])
 
 def izvrsiEditorEvente(event):
     #za svaki unos funkcije za događaj dotičnog tipa ... izvrši je
@@ -202,4 +206,4 @@ def izvrsiEditorEvente(event):
 def ucitajObjekte():
     o0=objekt0()
     s1=pgSquare(varijable.screen,"veliki",100,30,100,100,randomColor())
-    s2=pgSquare(s1,"mali",-5,10,10,10,randomColor())
+    s2=pgSquare(s1,"mali",5,10,50,50,randomColor())
